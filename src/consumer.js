@@ -1,3 +1,3 @@
-import ToastrContext from "./context";
-const Consumer = ToastrContext.Consumer;
+import ToastedContext from "./context";
+const Consumer = ToastedContext.Consumer;
 export default Consumer;

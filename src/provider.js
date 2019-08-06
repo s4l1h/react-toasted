@@ -1,5 +1,5 @@
 import React from "react";
-import ToastrContext from "./context";
+import ToastedContext from "./context";
 import ToastContainer from "./components/ToastContainer";
 
 class Provider extends React.Component {
@@ -34,7 +34,7 @@ class Provider extends React.Component {
       <React.Fragment>
         {/*We could avoid react.js re-render.*/}
         <ToastContainer ref={this.container} {...this.props} />
-        <ToastrContext.Provider
+        <ToastedContext.Provider
           value={{
             s: this.s,
             i: this.i,
@@ -46,7 +46,7 @@ class Provider extends React.Component {
           }}
         >
           {this.props.children}
-        </ToastrContext.Provider>
+        </ToastedContext.Provider>
       </React.Fragment>
     );
   }

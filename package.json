@@ -1,10 +1,12 @@
 {
   "name": "react-toasted",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React.js Toast Component",
+  "author": "s4l1h",
   "keywords": [
     "react.js",
     "toast",
+    "toasted",
     "toastr"
   ],
   "main": "lib/react-toasted.js",
@@ -35,6 +37,15 @@
   "scripts": {
     "build": "webpack",
     "clear": "rm lib/*"
+  },
+  "bugs": {
+    "url": "https://github.com/s4l1h/react-toasted/issues"
+  },
+  "homepage": "https://github.com/s4l1h/react-toasted#readme",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/s4l1h/react-toasted.git"
   },
   "browserslist": [
     ">0.2%",
