@@ -1,0 +1,45 @@
+{
+  "name": "react-toasted",
+  "version": "1.0.0",
+  "description": "React.js Toast Component",
+  "keywords": [
+    "react.js",
+    "toast",
+    "toastr"
+  ],
+  "main": "lib/react-toasted.js",
+  "dependencies": {
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "terser-webpack-plugin": "^1.4.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.21.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "css-loader": "^3.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "node-sass": "^4.12.0",
+    "path": "^0.12.7",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "sass-loader": "^7.1.0",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6"
+  },
+  "files": [
+    "lib",
+    "src"
+  ],
+  "scripts": {
+    "build": "webpack",
+    "clear": "rm lib/*"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
