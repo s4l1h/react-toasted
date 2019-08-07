@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import PropsType from "prop-types";
 import positions from "../positions";
 import Toast from "./Toast";
@@ -11,7 +11,7 @@ import {
   findToastByIndex
 } from "../utils/helper";
 
-class ToastContainer extends React.Component {
+class ToastContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {

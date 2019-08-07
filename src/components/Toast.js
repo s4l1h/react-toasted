@@ -1,8 +1,8 @@
-import React from "react";
+import React, { Component } from "react";
 import ToastProgress from "./ToastProgress";
 import IntervalTimeManager from "../utils/IntervalTimeManager";
 import PropsType from "prop-types";
-class Toast extends React.Component {
+class Toast extends Component {
   constructor(props) {
     super(props);
 

@@ -1,6 +1,5 @@
 .DS_Store
 node_modules
-
 # editor directories and files
 .idea
 .vscode
