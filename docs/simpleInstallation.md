@@ -33,7 +33,7 @@ ReactDOM.render(
       defaultRemoveOnClick: true,
       defaultTimeout: 5000,
       defaultProgressBar: true,
-      defaultProgressBarValue: null,
+      defaultProgressBarValue: 0,
       defaultPreventDuplicates: false,
       defaultStyle: {}
       //      defaultPositions: positions // default positions in "react-toasted/src/positions.js"

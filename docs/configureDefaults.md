@@ -13,7 +13,7 @@ if you would like to overwrite default options you can do like that.
     defaultRemoveOnClick: true,
     defaultTimeout: 5000,
     defaultProgressBar: true,
-    defaultProgressBarValue: null,
+    defaultProgressBarValue: 0,
     defaultPreventDuplicates: false,
     defaultStyle: {}
     //      defaultPositions: positions
