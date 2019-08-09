@@ -20,6 +20,8 @@ class ToastContainer extends Component {
       savedNames: {}
     };
   }
+  static displayName = "ToastContainer";
+
   processObjectData = data => {
     let newData = {};
     // if Object
@@ -160,12 +162,7 @@ class ToastContainer extends Component {
           <div className={`toast-container ${position}`} key={position}>
             {list[position].map(toast => {
               return (
-                <Toast
-                  {...toast}
-                  remove={this.remove}
-                  removeAll={this.removeAll}
-                  key={toast.index}
-                />
+                <Toast {...toast} _remove={this.remove} key={toast.index} />
               );
             })}
           </div>
@@ -183,7 +180,7 @@ ToastContainer.defaultProps = {
   defaultRemoveOnClick: true,
   defaultTimeout: 5000,
   defaultProgressBar: true,
-  defaultProgressBarValue: null,
+  defaultProgressBarValue: 0,
   defaultPreventDuplicates: false,
   defaultStyle: {},
   defaultPositions: positions
@@ -199,6 +196,7 @@ ToastContainer.propTypes = {
   defaultRemoveOnClick: PropsType.bool,
   defaultTimeout: PropsType.number,
   defaultProgressBar: PropsType.bool,
+  defaultProgressBarValue: PropsType.number,
   defaultPreventDuplicates: PropsType.bool
 };
 

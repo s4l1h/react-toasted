@@ -8,15 +8,11 @@ class Toast extends Component {
 
     this.progressBarTimer = null;
     this.timeoutTimer = null;
-    this.showProgressBar = false;
-    this.state = { percent: 100 };
-
-    this.classNames = ["toast", "toast-" + props.type]
-      .concat(props.classNames)
-      .join(" ");
+    this.state = { percent: 0, showProgressBar: false };
   }
+  static displayName = "Toast";
   getPercent = () => {
-    if (this.props.progressBarValue != null) {
+    if (this.props.progressBarValue !== 0) {
       return this.props.progressBarValue;
     }
     return this.state.percent;
@@ -51,7 +47,9 @@ class Toast extends Component {
         totalTime: this.props.timeout,
         callbackFunctions: {
           "after:finish": () => {
-            this.props.remove(this.props);
+            if (typeof this.props._remove !== "undefined") {
+              this.props._remove(this.props);
+            }
             // console.log("Timeout Fired");
           },
           callback: () => {
@@ -63,16 +61,20 @@ class Toast extends Component {
       });
       // SetUP progressbar Time Manager
       if (this.props.progressBar !== false) {
-        this.showProgressBar = true;
+        this.setState({
+          showProgressBar: true
+        });
         this.progressBarTimer = IntervalTimeManager({
           totalTime: this.props.timeout
         });
       }
     } else if (
-      this.props.progressBarValue !== null &&
-      this.props.progressBar !== false
+      this.props.progressBar !== false &&
+      this.props.progressBarValue !== 0
     ) {
-      this.showProgressBar = true;
+      this.setState({
+        showProgressBar: true
+      });
     }
   }
   onClick = () => {
@@ -80,7 +82,9 @@ class Toast extends Component {
       this.props.onClick();
     }
     if (this.props.removeOnClick) {
-      this.props.remove(this.props);
+      if (typeof this.props._remove !== "undefined") {
+        this.props._remove(this.props);
+      }
     }
   };
   onMouseOver = () => {
@@ -111,12 +115,16 @@ class Toast extends Component {
         style={{
           ...this.props.style
         }}
-        className={this.classNames}
+        className={["toast", "toast-" + this.props.type]
+          .concat(this.props.classNames)
+          .join(" ")}
         onClick={this.onClick}
         onMouseOver={this.onMouseOver}
         onMouseOut={this.onMouseOut}
       >
-        {this.showProgressBar && <ToastProgress percent={this.getPercent()} />}
+        {this.state.showProgressBar && (
+          <ToastProgress percent={this.getPercent()} />
+        )}
         {this.props.title !== "" && (
           <div className="toast-title">{this.props.title}</div>
         )}
@@ -137,21 +145,40 @@ Toast.defaultProps = {
   onMouseOut: false,
   onCreated: false,
   onDestroyed: false,
-  timeout: 5000
+  timeout: 5000,
+  progressBar: true,
+  progressBarValue: 0
 };
 Toast.propTypes = {
+  /** Toast Title */
   title: PropsType.string,
+  /** Toast Message */
   msg: PropsType.string.isRequired,
+  /** Toast Injected Class Names */
   classNames: PropsType.array,
+  /** Toast Injected Style */
   style: PropsType.object,
+  /** Toast Position */
   position: PropsType.string.isRequired,
+  /** Toast Type */
   type: PropsType.oneOf(["success", "warning", "error", "info"]).isRequired,
+  /* Close Toast When it clicked */
   removeOnClick: PropsType.bool,
+  /** Toast onClick event */
   onClick: PropsType.oneOfType([PropsType.bool, PropsType.func]),
+  /** Toast onMouseOver event function */
   onMouseOver: PropsType.oneOfType([PropsType.bool, PropsType.func]),
+  /** Toast onMouseOut event function */
   onMouseOut: PropsType.oneOfType([PropsType.bool, PropsType.func]),
+  /** Toast onCreated event function */
   onCreated: PropsType.oneOfType([PropsType.bool, PropsType.func]),
+  /** Toast onDestroyed event function */
   onDestroyed: PropsType.oneOfType([PropsType.bool, PropsType.func]),
-  timeout: PropsType.number
+  /** Toast Timeout time */
+  timeout: PropsType.number,
+  /** Show Progress Bar? */
+  progressBar: PropsType.bool,
+  /** Static Progress Bar Value */
+  progressBarValue: PropsType.number
 };
 export default Toast;

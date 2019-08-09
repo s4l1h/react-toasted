@@ -8,6 +8,8 @@ class Provider extends React.Component {
     this.state = {};
     this.container = React.createRef();
   }
+  static displayName = "Provider";
+
   s = (...params) => {
     return this.container.current.s(...params);
   };
