@@ -2,4 +2,4 @@
 
 React.js Toast Component
 
-Demo and Examples : [https://codesandbox.io/s/react-toasted-demo-fvbm7](https://codesandbox.io/s/react-toasted-demo-fvbm7)
+Documentation and Storybook : [https://s4l1h.github.io/react-toasted/](https://s4l1h.github.io/react-toasted/)

@@ -1,6 +1,6 @@
 {
   "name": "react-toasted",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "React.js Toast Component",
   "author": "s4l1h",
   "keywords": [
@@ -17,13 +17,23 @@
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
+    "@storybook/addon-actions": "^5.1.10",
+    "@storybook/addon-info": "^5.1.10",
+    "@storybook/addon-knobs": "^5.1.10",
+    "@storybook/addons": "^5.1.10",
+    "@storybook/react": "^5.1.10",
+    "@storybook/storybook-deployer": "^2.8.1",
+    "animate.css": "^3.7.2",
+    "babel-loader": "^8.0.6",
     "node-sass": "^4.12.0",
     "path": "^0.12.7",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "rollup": "^1.19.3",
     "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-scss": "^1.0.2"
+    "rollup-plugin-scss": "^1.0.2",
+    "storybook-addon-jsx": "^7.1.5",
+    "storybook-readme": "^5.0.6"
   },
   "files": [
     "lib/react-toasted.js",
@@ -32,7 +42,10 @@
   ],
   "scripts": {
     "build": "rollup -c;rm lib/style.js",
-    "clear": "rm lib/*"
+    "clear": "rm lib/*",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "deploy-storybook": "storybook-to-ghpages"
   },
   "bugs": {
     "url": "https://github.com/s4l1h/react-toasted/issues"
