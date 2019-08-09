@@ -58,6 +58,22 @@ const SampleContextConsumer = () => {
 export default SampleContextConsumer;
 ```
 
+### Access toasted via React.js Hooks
+
+```js
+import ToastedContext from "react-toasted";
+import React, { useContext } from "react";
+const SampleUseContext = () => {
+  // Acces toast via context
+  const toasted = useContext(ToastedContext);
+  const trigger = () => {
+    toasted.e("react hooks useContext", "SampleUseContext");
+  };
+  return <button onClick={trigger}>Create Toast</button>;
+};
+export default SampleUseContext;
+```
+
 ### Access toasted via HOC
 
 ```js
