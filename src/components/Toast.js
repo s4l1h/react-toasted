@@ -18,6 +18,7 @@ class Toast extends Component {
     return this.state.percent;
   };
   componentDidMount() {
+    this.setupProgressBarAndTimer();
     if (this.props.onCreated) {
       this.props.onCreated();
     }
@@ -40,7 +41,7 @@ class Toast extends Component {
       this.timeoutTimer.stop();
     }
   }
-  componentWillMount() {
+  setupProgressBarAndTimer() {
     if (this.props.timeout !== 0) {
       // SetUP timeout Manager
       this.timeoutTimer = IntervalTimeManager({
