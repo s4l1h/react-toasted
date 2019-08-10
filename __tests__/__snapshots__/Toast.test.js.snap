@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Toast Component Snapshot basic toast snapshot 1`] = `
+<div>
+  <div
+    class="toast toast-success"
+  >
+    <div
+      class="toast-message"
+    />
+  </div>
+</div>
+`;
+
+exports[`Toast Component Snapshot it has to match snapshot 1`] = `
+<div>
+  <div
+    class="toast toast-success animated"
+    style="color: red;"
+  >
+    <div
+      class="toast-title"
+    >
+      Full
+    </div>
+    <div
+      class="toast-message"
+    >
+      Look at the console
+    </div>
+  </div>
+</div>
+`;

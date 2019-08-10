@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ToastProgress Component it shows toast progress bar 1`] = `
+<div>
+  <div
+    class="toast-progress"
+    style="width: 90%;"
+  />
+</div>
+`;

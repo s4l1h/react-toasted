@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ToastContainer Snapshot basic toast snapshot 1`] = `
+<div>
+  <div
+    class="toast-container toast-top-right"
+  />
+  <div
+    class="toast-container toast-bottom-right"
+  />
+  <div
+    class="toast-container toast-bottom-left"
+  />
+  <div
+    class="toast-container toast-top-left"
+  />
+  <div
+    class="toast-container toast-top-full-width"
+  />
+  <div
+    class="toast-container toast-bottom-full-width"
+  />
+  <div
+    class="toast-container toast-top-center"
+  />
+  <div
+    class="toast-container toast-bottom-center"
+  />
+</div>
+`;
+
+exports[`ToastContainer Snapshot it has to match snapshot 1`] = `
+<div>
+  <div
+    class="toast-container toast-top-right"
+  />
+  <div
+    class="toast-container toast-bottom-right"
+  />
+  <div
+    class="toast-container toast-bottom-left"
+  />
+  <div
+    class="toast-container toast-top-left"
+  />
+  <div
+    class="toast-container toast-top-full-width"
+  />
+  <div
+    class="toast-container toast-bottom-full-width"
+  />
+  <div
+    class="toast-container toast-top-center"
+  />
+  <div
+    class="toast-container toast-bottom-center"
+  />
+</div>
+`;
