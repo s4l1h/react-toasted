@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { render } from "@testing-library/react";
-import ToastedContext, { Provider, Consumer, withToasted } from "../index";
+import ToastedContext, { Provider, Consumer, withToasted } from "../src/index";
 
 export const SampleConsumerUseContext = () => {
   // Acces toast from context
@@ -10,9 +10,10 @@ export const SampleConsumerUseContext = () => {
 export class SampleConsumerContextType extends React.Component {
   // use toasted contextType
   static contextType = ToastedContext;
+
   render() {
     // get toasted from context
-    let toasted = this.context;
+    const toasted = this.context;
     return <BasicComponent toasted={toasted} />;
   }
 }
@@ -77,7 +78,7 @@ export const ProviderWrapper = ({ children }) => {
         defaultProgressBarValue: 0,
         defaultPreventDuplicates: false,
         defaultStyle: {}
-        //defaultPositions: positions
+        // defaultPositions: positions
       }}
     >
       {children}

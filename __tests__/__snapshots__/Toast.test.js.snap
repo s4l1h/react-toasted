@@ -4,6 +4,7 @@ exports[`Toast Component Snapshot basic toast snapshot 1`] = `
 <div>
   <div
     class="toast toast-success"
+    role="presentation"
   >
     <div
       class="toast-message"
@@ -16,6 +17,7 @@ exports[`Toast Component Snapshot it has to match snapshot 1`] = `
 <div>
   <div
     class="toast toast-success animated"
+    role="presentation"
     style="color: red;"
   >
     <div

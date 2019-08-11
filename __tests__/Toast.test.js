@@ -1,13 +1,6 @@
-// __tests__/hidden-message.js
-// these imports are something you'd normally configure Jest to import for you
-// automatically. Learn more in the setup docs: https://testing-library.com/docs/react-testing-library/setup#cleanup
-// import "@testing-library/react/cleanup-after-each";
 import "@testing-library/jest-dom/extend-expect";
-
-// NOTE: jest-dom adds handy assertions to Jest and is recommended, but not required
-
 import React from "react";
-import { render, fireEvent, cleanup } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 import Toast from "../src/components/Toast";
 
 describe("Toast Component Snapshot", () => {
@@ -37,12 +30,12 @@ describe("Toast Component Snapshot", () => {
   });
 });
 describe("Toast Events", () => {
-  let toastMessage = "Message";
-  let onCreated = jest.fn();
-  let onClicked = jest.fn();
-  let onMouseOver = jest.fn();
-  let onMouseOut = jest.fn();
-  let onDestroyed = jest.fn();
+  const toastMessage = "Message";
+  const onCreated = jest.fn();
+  const onClicked = jest.fn();
+  const onMouseOver = jest.fn();
+  const onMouseOut = jest.fn();
+  const onDestroyed = jest.fn();
   const { getByText, unmount } = render(
     <Toast
       msg={toastMessage}
@@ -50,7 +43,9 @@ describe("Toast Events", () => {
       onCreated={onCreated}
       onClick={onClicked}
       onMouseOver={onMouseOver}
+      onFocus={onMouseOver}
       onMouseOut={onMouseOut}
+      onBlur={onMouseOut}
       onDestroyed={onDestroyed}
     />
   );

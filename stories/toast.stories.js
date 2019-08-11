@@ -4,7 +4,6 @@ import { action } from "@storybook/addon-actions";
 import { withInfo } from "@storybook/addon-info";
 
 import JSXAddon from "storybook-addon-jsx";
-setAddon(JSXAddon);
 
 import {
   withKnobs,
@@ -19,12 +18,23 @@ import {
 import { Toast, Provider, Consumer, ToastContainer } from "../src/index";
 import positions from "../src/positions";
 
+import toastOptions from "../docs/toastOptions.md";
+
+setAddon(JSXAddon);
+
 require("../lib/react-toasted.css");
 require("animate.css");
 
 const BasicButton = props => {
-  return <button {...props}>{props.children}</button>;
+  // eslint-disable-next-line
+  const { children } = props.children;
+  return (
+    <button type="button" {...props}>
+      {children}
+    </button>
+  );
 };
+
 const types = ["success", "warning", "error", "info"];
 const actions = {
   onClick: action("onClicked"),
@@ -36,8 +46,8 @@ const actions = {
 // TODO: I need to force rerender stories when timeout changed.
 storiesOf("Toast", module)
   .addDecorator(story => {
-    let props = story();
-    let className = `toast-container ${props.position}`;
+    const props = story();
+    const className = `toast-container ${props.position}`;
     return (
       <div className={className}>
         <Toast {...props} />
@@ -69,7 +79,7 @@ storiesOf("Toast", module)
     {
       readme: {
         // Show readme before story
-        sidebar: require("../docs/toastOptions.md").default
+        sidebar: toastOptions
       }
     }
   );

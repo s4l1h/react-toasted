@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropsType from "prop-types";
-import positions from "../positions";
 import Toast from "./Toast";
 import newID from "../utils/newid";
+import basePositions from "../positions";
 // for manupulation state
 import {
   generateList,
@@ -12,21 +12,26 @@ import {
 } from "../utils/helper";
 
 class ToastContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      list: generateList(props.defaultPositions),
-      positions: props.defaultPositions,
+  state = {
+    list: {},
+    positions: [],
+    savedNames: {}
+  };
+
+  componentDidMount() {
+    const { defaultPositions } = this.props;
+    this.setState({
+      list: generateList(defaultPositions),
+      positions: defaultPositions,
       savedNames: {}
-    };
+    });
   }
-  static displayName = "ToastContainer";
 
   processObjectData = data => {
     let newData = {};
     // if Object
     if (typeof data !== "object") {
-      newData["msg"] = data.toString();
+      newData.msg = data.toString();
     } else if (typeof data.msg === "undefined") {
       throw Error("msg cannot be blank");
     } else {
@@ -35,7 +40,7 @@ class ToastContainer extends Component {
     }
 
     // if String
-    let options = [
+    const options = [
       "classNames",
       "position",
       "newestOnTop",
@@ -47,115 +52,128 @@ class ToastContainer extends Component {
       "preventDuplicates",
       "style"
     ];
+    const all = this.props;
     options.forEach(key => {
       if (typeof newData[key] === "undefined") {
-        newData[key] = this.props[
-          `default${key.charAt(0).toUpperCase()}${key.slice(1)}`
-        ];
+        newData[key] =
+          all[`default${key.charAt(0).toUpperCase()}${key.slice(1)}`];
       }
     });
     return newData;
   };
+
   removeAll = () => {
+    const { defaultPositions } = this.props;
     this.setState({
-      list: generateList(this.props.defaultPositions),
+      list: generateList(defaultPositions),
       savedNames: {}
     });
   };
+
   remove = data => {
     let item = [];
+    const { list, savedNames } = this.state;
+
     // if is it an object
     if (typeof data === "object") {
       if (typeof data.position !== "undefined") {
-        item = this.state.list[data.position].filter(toast => {
+        item = list[data.position].filter(toast => {
           return toast.index === data.index;
         });
       } else if (typeof data.index !== "undefined") {
-        item = findToastByIndex({ ...this.state.list }, data.index);
+        item = findToastByIndex({ ...list }, data.index);
       } else {
         throw Error(`Invalid Data Format for remove Toast ${data.toString()}`);
       }
     } else if (
       // if is it a toast name
       typeof data === "string" &&
-      typeof this.state.savedNames[data] !== "undefined"
+      typeof savedNames[data] !== "undefined"
     ) {
-      let index = this.state.savedNames[data];
-      item = findToastByIndex({ ...this.state.list }, index);
+      const index = savedNames[data];
+      item = findToastByIndex({ ...list }, index);
     }
 
     if (item.length !== 0) {
       this.setState(removeToast(item[0]));
     }
   };
+
   addToast = data => {
-    var found = [];
+    let found = [];
+    const { list, positions } = this.state;
 
     if (data.preventDuplicates) {
-      found = this.state.list[data.position].filter(toast => {
+      found = list[data.position].filter(toast => {
         return toast.title === data.title && toast.msg === data.msg;
       });
       if (found.length > 0) {
-        return { index: found[0]["index"] };
+        return { index: found[0].index };
       }
     }
     // We can use props-type but they might use custom position list.
-    if (!this.state.positions.includes(data.position)) {
+    if (!positions.includes(data.position)) {
       throw Error(`Invalid Toast Position ${data.position}`);
     }
-    let newData = { ...data };
-    newData["index"] = newID();
+    const newData = { ...data };
+    newData.index = newID();
     this.setState(addToast(newData));
 
     return {
       index: newData.index
     };
   };
+
   add = d => {
-    return this._addData(this.processObjectData(d));
+    return this.addData(this.processObjectData(d));
   };
-  _addData = data => {
+
+  addData = data => {
     if (typeof data !== "object") {
-      throw Error("_addData accept only Object", data.toString());
+      throw Error("addData accept only Object", data.toString());
     }
     return this.addToast(data);
   };
+
   e = (msg, title) => {
-    var data = this.processObjectData(msg);
-    data["type"] = "error";
+    const data = this.processObjectData(msg);
+    data.type = "error";
     if (typeof title !== "undefined") {
-      data["title"] = title;
+      data.title = title;
     }
-    return this._addData(data);
+    return this.addData(data);
   };
+
   s = (msg, title) => {
-    var data = this.processObjectData(msg);
-    data["type"] = "success";
+    const data = this.processObjectData(msg);
+    data.type = "success";
     if (typeof title !== "undefined") {
-      data["title"] = title;
+      data.title = title;
     }
-    return this._addData(data);
+    return this.addData(data);
   };
+
   w = (msg, title) => {
-    var data = this.processObjectData(msg);
-    data["type"] = "warning";
+    const data = this.processObjectData(msg);
+    data.type = "warning";
     if (typeof title !== "undefined") {
-      data["title"] = title;
+      data.title = title;
     }
-    return this._addData(data);
+    return this.addData(data);
   };
+
   i = (msg, title) => {
-    var data = this.processObjectData(msg);
-    data["type"] = "info";
+    const data = this.processObjectData(msg);
+    data.type = "info";
     if (typeof title !== "undefined") {
-      data["title"] = title;
+      data.title = title;
     }
-    return this._addData(data);
+    return this.addData(data);
   };
 
   render() {
-    //console.log("render provider");
-    let { positions, list } = this.state;
+    // console.log("render provider");
+    const { positions, list } = this.state;
     return (
       <React.Fragment>
         {positions.map(position => (
@@ -183,21 +201,21 @@ ToastContainer.defaultProps = {
   defaultProgressBarValue: 0,
   defaultPreventDuplicates: false,
   defaultStyle: {},
-  defaultPositions: positions
+  defaultPositions: basePositions
 };
 ToastContainer.propTypes = {
-  defaultPositions: PropsType.array.isRequired,
-  defaultPosition: PropsType.string.isRequired,
-  defaultNewestOnTop: PropsType.bool.isRequired,
+  defaultPositions: PropsType.array,
+  defaultPosition: PropsType.string,
+  defaultNewestOnTop: PropsType.bool,
   defaultClassNames: PropsType.array,
   defaultStyle: PropsType.object,
-  defaultType: PropsType.oneOf(["success", "warning", "error", "info"])
-    .isRequired,
+  defaultType: PropsType.oneOf(["success", "warning", "error", "info"]),
   defaultRemoveOnClick: PropsType.bool,
   defaultTimeout: PropsType.number,
   defaultProgressBar: PropsType.bool,
   defaultProgressBarValue: PropsType.number,
   defaultPreventDuplicates: PropsType.bool
 };
+ToastContainer.displayName = "ToastContainer";
 
 export default ToastContainer;

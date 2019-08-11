@@ -7,8 +7,8 @@ module.export = {
   moduleFileExtensions: ["js", "jsx", "json", "node"],
   testPathIgnorePatterns: ["/node_modules/"],
   setupFilesAfterEnv: [
-    //"@testing-library/react/cleanup-after-each",
-    //"@testing-library/jest-dom/extend-expect"
+    // "@testing-library/react/cleanup-after-each",
+    // "@testing-library/jest-dom/extend-expect"
     // setupFiles before the tests are ran
   ]
 };

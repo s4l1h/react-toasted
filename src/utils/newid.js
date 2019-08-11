@@ -1,6 +1,5 @@
 let lastId = 0;
-
 export default () => {
-  lastId++;
+  lastId += 1;
   return lastId;
 };

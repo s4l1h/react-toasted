@@ -7,7 +7,7 @@ const IntervalTimeManager = params => ({
   stepTime: params.stepTime || 50,
   callbackFunctions: params.callbackFunctions || {},
   callback() {
-    this.times["callback"] = this.getTime();
+    this.times.callback = this.getTime();
 
     this.remaning = this.remaning - this.stepTime;
     this.estimated = this.estimated + this.stepTime;
@@ -15,7 +15,7 @@ const IntervalTimeManager = params => ({
     this.callCallbackFN("callback");
 
     if (this.remaning <= 0) {
-      return this.finish();
+      this.finish();
     }
   },
   getTime() {
@@ -25,35 +25,35 @@ const IntervalTimeManager = params => ({
     return Math.floor((this.remaning / this.totalTime) * 100);
   },
   start() {
-    this.times["started"] = this.getTime();
+    this.times.started = this.getTime();
     this.callCallbackFN("before:start");
     this.remaning = this.totalTime;
-    this._setupInterval();
+    this.setupInterval();
     this.callCallbackFN("after:start");
   },
   finish() {
-    this.times["finished"] = this.getTime();
+    this.times.finished = this.getTime();
     this.callCallbackFN("before:finish");
-    this._clearInterval(this.id);
+    this.clearInterval(this.id);
     this.callCallbackFN("after:finish");
   },
   stop() {
-    this.times["stoped"] = this.getTime();
+    this.times.stoped = this.getTime();
     // People can stop manualy
     this.callCallbackFN("before:stop");
-    this._clearInterval(this.id);
+    this.clearInterval(this.id);
     this.callCallbackFN("after:stop");
   },
   pause() {
-    this.times["paused"] = this.getTime();
+    this.times.paused = this.getTime();
     this.callCallbackFN("before:pause");
-    this._clearInterval(this.id);
+    this.clearInterval(this.id);
     this.callCallbackFN("after:pause");
   },
   resume() {
-    this.times["resumed"] = this.getTime();
+    this.times.resumed = this.getTime();
     this.callCallbackFN("before:resume");
-    this._setupInterval();
+    this.setupInterval();
     this.callCallbackFN("after:resume");
   },
   callCallbackFN(type) {
@@ -62,10 +62,10 @@ const IntervalTimeManager = params => ({
       this.callbackFunctions[type]();
     }
   },
-  _clearInterval() {
+  clearInterval() {
     clearInterval(this.id);
   },
-  _setupInterval() {
+  setupInterval() {
     this.id = setInterval(() => {
       this.callback();
     }, this.stepTime);

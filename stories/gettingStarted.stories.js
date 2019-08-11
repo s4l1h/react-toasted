@@ -1,87 +1,55 @@
-import React from "react";
-import marked from "marked";
-import { storiesOf, setAddon } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
+import { storiesOf } from "@storybook/react";
+import installation from "../docs/installation.md";
+import importStyle from "../docs/importStyle.md";
+import configureDefaults from "../docs/configureDefaults.md";
+import simpleInstallation from "../docs/simpleInstallation.md";
+import howtouseit from "../docs/howtouseit.md";
+import functions from "../docs/functions.md";
 
 require("../lib/react-toasted.css");
 require("animate.css");
 
 storiesOf("Getting Started", module)
-  //.addDecorator(withKnobs)
-  .add(
-    "Installation",
-    () => {
-      return;
-    },
-    {
-      readme: {
-        // Show readme before story
-        content: require("../docs/installation.md").default
-        // Show readme at the addons panel
-        //sidebar: importStyle
-      }
+  // .addDecorator(withKnobs)
+  .add("Installation", () => {}, {
+    readme: {
+      // Show readme before story
+      content: installation
+      // Show readme at the addons panel
+      // sidebar: importStyle
     }
-  )
-  .add(
-    "Import Style File",
-    () => {
-      return;
-    },
-    {
-      readme: {
-        // Show readme before story
-        content: require("../docs/importStyle.md").default
-      }
+  })
+  .add("Import Style File", () => {}, {
+    readme: {
+      // Show readme before story
+      content: importStyle
     }
-  )
-  .add(
-    "Configure Defaults",
-    () => {
-      return;
-    },
-    {
-      readme: {
-        // Show readme before story
-        content: require("../docs/configureDefaults.md").default
-      }
+  })
+  .add("Configure Defaults", () => {}, {
+    readme: {
+      // Show readme before story
+      content: configureDefaults
     }
-  )
-  .add(
-    "Simple Installation",
-    () => {
-      return;
-    },
-    {
-      readme: {
-        // Show readme before story
-        content: require("../docs/simpleInstallation.md").default
-      }
+  })
+  .add("Simple Installation", () => {}, {
+    readme: {
+      // Show readme before story
+      content: simpleInstallation
     }
-  )
-  .add(
-    "How To Use It?",
-    () => {
-      return;
-    },
-    {
-      readme: {
-        content: require("../docs/howtouseit.md").default
-      }
+  })
+  .add("How To Use It?", () => {}, {
+    readme: {
+      content: howtouseit
     }
-  )
-  .add(
-    "Functions",
-    () => {
-      return;
-    },
-    {
-      readme: {
-        content: require("../docs/functions.md").default
-      }
+  })
+  .add("Functions", () => {}, {
+    readme: {
+      content: functions
     }
-  )
+  })
   .add("Demo & Example", () => {}, {
     readme: {
-      content: `I made a sample project. You can access from [Here](https://codesandbox.io/s/react-toasted-demo-fvbm7)`
+      content: `I made a sample project. 
+      You can access from [Here](https://codesandbox.io/s/react-toasted-demo-fvbm7)`
     }
   });
